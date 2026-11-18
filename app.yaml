@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: ghcr.io/asecdycom/chatbot-ci:sha-4e3f0c5
+        image: ghcr.io/asecdycom/chatbot-ci:sha-4e3f0c
         ports:
         - containerPort: 8000
         readinessProbe:
