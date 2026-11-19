@@ -1,0 +1,38 @@
+# 숙제 도우미 챗봇의 새 판 (Green). chatbot-web 옆에 한 벌을 더 띄웁니다
+# 고칠 곳은 image 줄 하나: stu01은 내 아이디 (소문자), sha-5d6e7f8은 새 Tag
+# app.yaml과 다른 줄은 chatbot-green 넷, version, image뿐입니다
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatbot-green
+  labels:
+    app: chatbot-green
+spec:
+  replicas: 3
+  minReadySeconds: 20
+  progressDeadlineSeconds: 60
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: chatbot-green
+  template:
+    metadata:
+      labels:
+        app: chatbot-green
+        tier: chat
+        version: green
+    spec:
+      containers:
+      - name: web
+        image: ghcr.io/stu01/chatbot-ci:sha-5d6e7f8
+        ports:
+        - name: http
+          containerPort: 8000
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8000
