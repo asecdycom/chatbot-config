@@ -7,7 +7,7 @@ metadata:
   name: chatbot
 spec:
   selector:
-    version: blue
+    version: green
   ports:
   - port: 80
     targetPort: http
